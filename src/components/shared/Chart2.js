@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
+import { connect } from 'react-redux';
 
 
 class Chart2 extends Component {
   render() {
-    let { purchases } = this.props;
+    let { purchases } = this.props.budget;
     purchases = purchases || [];
     const labels = purchases
       .map(purchase => purchase.category)
@@ -41,4 +42,10 @@ class Chart2 extends Component {
   }
 }
 
-export default Chart2;
+function mapStateToProps (reduxState) {
+  return {
+    budget: reduxState.budget,
+  }
+}
+
+export default connect(mapStateToProps) (Chart2);

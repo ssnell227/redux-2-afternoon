@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
 class DisplayPurchases extends Component {
   render() {
-    let { purchases } = this.props;
+    let { purchases } = this.props.budget;
     if (!purchases) purchases = [{ id: 1000, description: 'Ship', price: 1, category: 'Other' }]
     return (
       <div className='display-purchases'>
@@ -23,4 +24,10 @@ class DisplayPurchases extends Component {
   }
 }
 
-export default DisplayPurchases
+function mapStateToProps (reduxState) {
+  return {
+    budget: reduxState.budget,
+  }
+}
+
+export default connect(mapStateToProps)(DisplayPurchases)

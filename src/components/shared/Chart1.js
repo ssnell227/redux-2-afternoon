@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import {connect} from 'react-redux'
 
 
 class Chart1 extends Component {
   render() {
-    let { purchases, budgetLimit } = this.props;
+    let { purchases, budgetLimit } = this.props.budget;
     purchases = purchases || [];
     const moneySpent = purchases.reduce((total, purchase) => {
       return total + purchase.price
@@ -35,4 +36,10 @@ class Chart1 extends Component {
   }
 }
 
-export default Chart1;
+function mapStateToProps (reduxState) {
+  return {
+    budget: reduxState.budget,
+  }
+}
+
+export default connect(mapStateToProps) (Chart1);
